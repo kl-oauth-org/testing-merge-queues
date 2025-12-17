@@ -1,0 +1,32 @@
+version: 2.1
+
+parameters:
+  param-a:
+    type: string
+    default: "current"
+    description: "somedescription"
+  another-param:
+    type: boolean
+    default: false
+  os:
+    default: "linux"
+    description: The target Operating System for the heroku binary. Must be one of "linux", "darwin", "win32".
+    type: enum
+    enum: ["linux", "darwin", "win32"]
+
+jobs:
+  hello-job:
+    docker:
+      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
+    steps:
+      - checkout # check out the code in the project directory
+      - run: echo "hello world" << pipeline.parameters.param-a >> # run the `echo` command
+
+workflows:
+  my-workflow:
+    jobs:
+      - hello-job:
+          filters:
+            tags:
+              only:
+                - /.*/
