@@ -54,3 +54,27 @@ workflows:
             tags:
               only:
                 - /.*/
+      - hello-job2:
+          filters:
+            tags:
+              only:
+                - /.*/
+
+      - hello-job3:
+          filters:
+            tags:
+              only:
+                - /.*/
+
+      - hello-job4:
+          filters:
+            tags:
+              only:
+                - /.*/
+
+      - hello-job5:
+          filters:
+            tags:
+              only:
+                - /.*/
+
