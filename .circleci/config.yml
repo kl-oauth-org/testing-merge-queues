@@ -74,25 +74,4 @@ workflows:
             tags:
               only:
                 - /.*/
-      - hello-job2:
-          requires:
-            - hello-job
-          filters:
-            tags:
-              only:
-                - /.*/
-      - hello-job3:
-          requires:
-            - hello-job2
-          filters:
-            tags:
-              only:
-                - /.*/
-      - hello-job4:
-          requires:
-            - hello-job
-          filters:
-            tags:
-              only:
-                - /.*/
 
