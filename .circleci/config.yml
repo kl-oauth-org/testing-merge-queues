@@ -30,7 +30,7 @@ jobs:
           command: |
             echo "Starting build at $(date)"
             echo "This would be your actual build steps..."
-            sleep 300
+            sleep 120
             echo "Build completed at $(date)"
       - checkout # check out the code in the project directory
       - run: echo "hello world 2" << pipeline.parameters.param-a >> # run the `echo` command
