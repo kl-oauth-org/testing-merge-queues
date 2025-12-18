@@ -39,6 +39,9 @@ jobs:
       - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
     steps:
       - run:
+        name: shallow clone
+        command: git clone --depth 1 "git@github.com:kl-oauth-org/testing-merge-queues.git" --branch "main" /home/circleci/project
+      - run:
           name: Simulate long build
           command: |
             echo "Starting build at $(date)"
