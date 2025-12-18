@@ -82,8 +82,6 @@ workflows:
               only:
                 - /.*/
       - hello-job3:
-          requires:
-            - hello-job2
           filters:
             tags:
               only:
