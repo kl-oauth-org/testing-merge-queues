@@ -30,7 +30,7 @@ jobs:
           command: |
             echo "Starting build at $(date)"
             echo "This would be your actual build steps..."
-            sleep 300
+            sleep 120
             echo "Build completed at $(date)"
       - checkout # check out the code in the project directory
       - run: echo "hello world 2" << pipeline.parameters.param-a >> # run the `echo` command
@@ -40,7 +40,9 @@ jobs:
     steps:
       - run:
           name: shallow clone
-          command: git clone --depth 1 "git@github.com:kl-oauth-org/testing-merge-queues.git" --branch "main" /home/circleci/project
+          command: |
+            echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            git clone --depth 1 "git@github.com:kl-oauth-org/testing-merge-queues.git" --branch "main" /home/circleci/project
       - run:
           name: Simulate long build
           command: |
@@ -68,6 +70,27 @@ workflows:
   my-workflow:
     jobs:
       - hello-job:
+          filters:
+            tags:
+              only:
+                - /.*/
+      - hello-job2:
+          requires:
+            - hello-job
+          filters:
+            tags:
+              only:
+                - /.*/
+      - hello-job3:
+          requires:
+            - hello-job2
+          filters:
+            tags:
+              only:
+                - /.*/
+      - hello-job4:
+          requires:
+            - hello-job
           filters:
             tags:
               only:
