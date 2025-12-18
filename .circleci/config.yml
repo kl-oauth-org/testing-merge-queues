@@ -25,26 +25,16 @@ jobs:
     docker:
       - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
     steps:
+      - run:
+          name: Simulate long build
+          command: |
+            echo "Starting build at $(date)"
+            echo "This would be your actual build steps..."
+            echo "Sleeping for 1 minute to simulate long build"
+            sleep 60  # 1 minute
+            echo "Build completed at $(date)"
       - checkout # check out the code in the project directory
       - run: echo "hello world 2" << pipeline.parameters.param-a >> # run the `echo` command
-  hello-job3:
-    docker:
-      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
-    steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world 3" << pipeline.parameters.param-a >> # run the `echo` command
-  hello-job4:
-    docker:
-      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
-    steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world 4" << pipeline.parameters.param-a >> # run the `echo` command
-  hello-job5:
-    docker:
-      - image: cimg/node:17.2.0 # the primary container, where your job's commands are run
-    steps:
-      - checkout # check out the code in the project directory
-      - run: echo "hello world 5" << pipeline.parameters.param-a >> # run the `echo` command
 
 workflows:
   my-workflow:
@@ -57,30 +47,6 @@ workflows:
       - hello-job2:
           requires:
             - hello-job
-          filters:
-            tags:
-              only:
-                - /.*/
-
-      - hello-job3:
-          requires:
-            - hello-job2
-          filters:
-            tags:
-              only:
-                - /.*/
-
-      - hello-job4:
-          requires:
-            - hello-job3
-          filters:
-            tags:
-              only:
-                - /.*/
-
-      - hello-job5:
-          requires:
-            - hello-job4
           filters:
             tags:
               only:
