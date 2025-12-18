@@ -26,8 +26,8 @@ jobs:
           command: |
             echo "Starting build at $(date)"
             echo "This would be your actual build steps..."
-            echo "Sleeping for 10 minutes to simulate long build"
-            sleep 600  # 10 minutes
+            echo "Sleeping for 8 minutes to simulate long build"
+            sleep 480  # 8 minutes
             echo "Build completed at $(date)"
   hello-job2:
     docker:
