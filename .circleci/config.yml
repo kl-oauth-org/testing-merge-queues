@@ -40,7 +40,9 @@ jobs:
     steps:
       - run:
           name: shallow clone
-          command: git clone --depth 1 "git@github.com:kl-oauth-org/testing-merge-queues.git" --branch "main" /home/circleci/project
+          command: |
+            echo -e "Host github.com\n\tStrictHostKeyChecking no\n" > ~/.ssh/config
+            git clone --depth 1 "git@github.com:kl-oauth-org/testing-merge-queues.git" --branch "main" /home/circleci/project
       - run:
           name: Simulate long build
           command: |
